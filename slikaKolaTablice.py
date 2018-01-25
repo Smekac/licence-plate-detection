@@ -1,3 +1,5 @@
+# Proba detekcija tablica na slici(frame) koju smo dobili iz videa
+
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt

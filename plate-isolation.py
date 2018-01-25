@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 
+# Funkcija koja vraca detekciju na sliku
 def ZaDetekciju(Okvir):
     img_barcode_gs = cv2.cvtColor(Okvir, cv2.COLOR_RGB2GRAY)  # konvert u grayscale
     plt.imshow(img_barcode_gs, 'gray')
