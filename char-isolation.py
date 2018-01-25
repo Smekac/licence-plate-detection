@@ -1,6 +1,12 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+from keras.models import Sequential
+from keras.layers import Convolution2D, MaxPooling2D
+from keras.layers import Flatten, Dense
+import prediction as pred
+
+img_width, img_height = 28, 28
 
 
 def dilate(image):
@@ -43,8 +49,11 @@ def prepare_for_nn(regions):
         ready_for_nn.append(region.flatten())
     return ready_for_nn
 
+# def find_plate(file_object,licence_plate):
+#     plates = file_object.read
 
-plate_color = cv2.imread('images/plate3.png')
+file_object = open('plates.txt','r+')
+plate_color = cv2.imread('images/plate9.png')
 plate_color = cv2.resize(plate_color, (450, 105), interpolation=cv2.INTER_NEAREST)
 # cv2.imshow('color',plate_color)
 plate_color = cv2.GaussianBlur(plate_color, (3, 3), 0)
@@ -53,15 +62,34 @@ cv2.imshow('gray', plate_gray)
 plate_bin = cv2.adaptiveThreshold(plate_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 61, 30)
 kernel = np.ones((4, 4))
 plate_bin = cv2.erode(plate_bin, kernel, iterations=1)
-# plate_bin = erode(dilate(plate_bin))
+#plate_bin = erode(dilate(plate_bin))
 cv2.imshow('binary', plate_bin)
 
 # izdvajanje regiona od interesa sa tablice
 selected_regions, chars = select_roi(plate_color, plate_bin)
 cv2.imshow('regions', selected_regions)
 
+#predikcija karaktera
+result = []
+for char in chars:
+    imgs = cv2.cvtColor(char,cv2.COLOR_GRAY2BGR)
+    cv2.imshow('test',imgs)
+    model = pred.create_model()
+    result.append(pred.prediction(model, imgs))
+print(result)
+
+licence_plate = ''.join(result) + '\n'
+licence_plates = file_object.readlines()
+if licence_plate not in licence_plates and len(licence_plate)>1:
+    file_object.write(licence_plate )
+
+# model = create_model()
+# model.load_weights('./mnistneuralnet.h5')
+# img_pred = cv2.imread('2.png')
+# img = cv2.resize(img_pred, (img_width, img_height))
+# prediction(img,model)
 # priprema za neuronsku mrezu
 inputs = prepare_for_nn(chars)
-
+file_object.close()
 plt.show()
 cv2.waitKey()
