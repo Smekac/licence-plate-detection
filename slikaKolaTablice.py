@@ -1,5 +1,4 @@
 # Proba detekcija tablica na slici(frame) koju smo dobili iz videa
-
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
@@ -8,9 +7,14 @@ from datetime import datetime
 nizSlika = ['ImagesFrame\slika1.jpg', 'ImagesFrame\slika7.jpg']
 index = 0
 
+
 while index < len(nizSlika):
 
     SlikaKola = cv2.imread(nizSlika[index])  # Slika1
+
+    # print(SlikaKola.shape)
+    # SlikaKola = cv2.resize(SlikaKola,(480,640),interpolation = cv2.INTER_CUBIC)
+
     SlikaKola = cv2.cvtColor(SlikaKola, cv2.COLOR_BGR2RGB)
 
     # pts = np.array([[150, 190], [150, 420], [380, 420], [380, 190]], np.int32)
@@ -52,12 +56,15 @@ while index < len(nizSlika):
     # y,x
     x, y, w, h = cv2.boundingRect(contours_Tablica[0])
     print(str(x) + ' Ovo je x kordinsata ,vis: ' + str(y) + ' srina je: ' + str(w) + ' A Visina je: ' + str(h))
+
+    #if(SlikaKola.shape == (480, 640, 3)):
     plt.imshow(SlikaKola[y:y + h, x:x + w])  # SlikaKola[x:x+w,y:y+h])
     # KropovanaSlika = SlikaKola[252:272,288:348]
     # plt.imshow(KropovanaSlika)
-
     plt.show()
-    cv2.imwrite('TabliceZaCimija\slika%d.jpg' % index, SlikaKola[y:y + h, x:x + w])
+    cv2.imwrite('Images\slika%d.jpg' % index, SlikaKola[y:y + h, x:x + w])
+
     index = index + 1
 
     print(str(len(contours_Tablica)))
+

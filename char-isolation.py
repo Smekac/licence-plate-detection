@@ -53,7 +53,7 @@ def prepare_for_nn(regions):
 #     plates = file_object.read
 
 file_object = open('plates.txt','r+')
-plate_color = cv2.imread('images/plate9.png')
+plate_color = cv2.imread('images/slika0.jpg')
 plate_color = cv2.resize(plate_color, (450, 105), interpolation=cv2.INTER_NEAREST)
 # cv2.imshow('color',plate_color)
 plate_color = cv2.GaussianBlur(plate_color, (3, 3), 0)
