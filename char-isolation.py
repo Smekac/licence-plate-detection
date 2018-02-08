@@ -3,6 +3,7 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 import prediction as pred
+import glob
 
 img_width, img_height = 28, 28
 
@@ -70,6 +71,7 @@ def load_cities(file_cities):
 def validate_plate(cities, licence_plate):
     city = licence_plate[0:2];
     cSimilar = {}
+    c1Ver = ''
     if city in cities:
         return licence_plate
     else:
@@ -85,7 +87,11 @@ def validate_plate(cities, licence_plate):
 # ucitavanje tekstualnih falova
 file_object = open('plates.txt', 'r+')
 file_cities = open('cities.txt', 'r')
-plate_color = cv2.imread('images/plate4.png')
+
+allPlates = glob.glob("plates/*.png")
+print(allPlates)
+# for i, plate in enumerate(allPlates):
+plate_color = cv2.imread(allPlates[1])
 
 cities = load_cities(file_cities)
 
@@ -123,7 +129,6 @@ if (len(chars) == 7 or len(chars) == 8 and len(chars) > 6):
 
     licence_plate = ''.join(result) + '\n'
     print('Pre validacije ' + licence_plate)
-
     checked = check_result(licence_plate)
     # provera da li su prva dva karaktera grada validna ako nisu menja ih u najverovatnije
     valid_plate = validate_plate(cities, licence_plate)
