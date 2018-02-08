@@ -3,61 +3,57 @@ from keras.models import Sequential
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.layers import Flatten, Dense
 
-img_width, img_height = 28, 28
 
-train_data_dir = 'data/train'
+def train(model):
+    model.compile(loss='binary_crossentropy',
+                  optimizer='rmsprop',
+                  metrics=['accuracy'])
 
-validation_data_dir = 'data/validation'
-
-train_samples = 800
-
-validation_samples = 215
-
-epoch = 15
-
-# ** Model Begins **
-model = Sequential()
-model.add(Convolution2D(16, 5, 5, activation='relu', input_shape=(img_width, img_height, 3)))
-model.add(MaxPooling2D(2, 2))
-
-model.add(Convolution2D(32, 3, 3, activation='relu'))
-model.add(MaxPooling2D(2, 2))
-
-model.add(Flatten())
-model.add(Dense(1000, activation='relu'))
-
-model.add(Dense(36, activation='softmax'))
-# ** Model Ends **
-
-model.compile(loss='binary_crossentropy',
-              optimizer='rmsprop',
-              metrics=['accuracy'])
-
-train_datagen = ImageDataGenerator(
-        rescale=1./255,
+    train_datagen = ImageDataGenerator(
+        rescale=1. / 255,
         shear_range=0.2,
         zoom_range=0.2,
         horizontal_flip=True)
 
-test_datagen = ImageDataGenerator(rescale=1./255)
+    test_datagen = ImageDataGenerator(rescale=1. / 255)
 
-train_generator = train_datagen.flow_from_directory(
+    train_generator = train_datagen.flow_from_directory(
         train_data_dir,
         target_size=(img_width, img_height),
         batch_size=32,
         class_mode='categorical')
 
-validation_generator = test_datagen.flow_from_directory(
+    validation_generator = test_datagen.flow_from_directory(
         validation_data_dir,
         target_size=(img_width, img_height),
         batch_size=32,
         class_mode='categorical')
 
-model.fit_generator(
+    model.fit_generator(
         train_generator,
         samples_per_epoch=train_samples,
         nb_epoch=epoch,
         validation_data=validation_generator,
         nb_val_samples=validation_samples)
 
-model.save_weights('weights.h5')
+    model.save_weights('weights.h5')
+
+
+img_width, img_height = 28, 28
+
+train_samples = 800
+validation_samples = 215
+train_data_dir = 'data/train'
+validation_data_dir = 'data/validation'
+epoch = 15
+
+model = Sequential()
+model.add(Convolution2D(16, 5, 5, activation='relu', input_shape=(img_width, img_height, 3)))
+model.add(MaxPooling2D(2, 2))
+model.add(Convolution2D(32, 3, 3, activation='relu'))
+model.add(MaxPooling2D(2, 2))
+model.add(Flatten())
+model.add(Dense(1000, activation='relu'))
+model.add(Dense(36, activation='softmax'))
+
+train(model)
