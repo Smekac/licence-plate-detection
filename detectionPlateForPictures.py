@@ -52,9 +52,17 @@ def ZaDetekciju(Okvir):
 #for index in range (0,15) : #Ako treba sve od jednom
 #Kola1 = cv2.imread('ImagesOfCars\PA210245.jpg') # P1010128.jpg')      #slika1.jpg')    #PA210245.jpg') #slika5.jpg')  # kolaMrak.png') #kola2.jpg')
 
+
+
+import os
+                            #C:/Users/Smekac/Desktop/ZnaciTo        #Paziti apsolutna putanja
+path, dirs, files = os.walk("C:/Users/Smekac/Desktop/ZnaciTo/ImagesOfCars").__next__()
+file_count = len(files)
+print("Broj fajlova je : " + str(file_count) )
+
 #for index in range(1,15):
 index =1
-while index < 17:
+while index <= file_count:
     Kola1 = cv2.imread('ImagesOfCars\kola%d.jpg' %index)
     #index = 15
 
