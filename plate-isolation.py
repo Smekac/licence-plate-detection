@@ -24,7 +24,7 @@ def ZaDetekciju(Okvir):
         width, height = size
         xx, yy, w, h = cv2.boundingRect(contour)
         x, y = center
-        if width > 15 and width < 120 and height > 35 and height < 100:  # uslov da kontura pripada bar-kodu
+        if width > 10 and width < 220 and height > 35 and height < 100:  # uslov da kontura pripada bar-kodu
             if (xx > 200 and xx < 400 and yy > 210 and yy < 380):
                 contours_Tablica.append(contour)  # ova kontura pripada bar-kodu
 
@@ -76,7 +76,7 @@ while (True):
         if cv2.countNonZero(diffImg(t_minus, t, t_plus)) > threshold and timeCheck != datetime.now().strftime('%Ss'):
             dimg = cap.read()[1]
             # cv2.imwrite(datetime.now().strftime('%Y%m%d_%Hh%Mm%Ss%f') + '.jpg', dimg)
-            cv2.imwrite('ImagesFrame\slika%d.jpg' % index, dimg)
+            cv2.imwrite('ImagesFrame2\slika%d.jpg' % index, dimg)
             index = index + 1
             # Sik = ZaDetekciju(dimg)
             # cv2.imshow(winName, Sik)
