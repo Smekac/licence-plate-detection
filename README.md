@@ -1,6 +1,11 @@
 # licence-plate-detection
 Soft computing project
 
+Pokretanje pograma:
+Za pronalaženje karaktera sa tablice potrebno je pokrenuti fajl char-isolation.py i u njemu postaviti željenu fotografiju u promenljivoj allPlates. Fotografije tablica se nalaze u folderu "plates". 
+
+
+
 Članovi tima :
 •	Ivan Vukašinović RA53/2014
 •	Dejan Stojkić RA 177/2014
