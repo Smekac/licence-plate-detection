@@ -55,7 +55,7 @@ def ZaDetekciju(Okvir):
 
 
 import os
-                            #C:/Users/Smekac/Desktop/ZnaciTo        #Paziti apsolutna putanja
+                            #C:/Users/Smekac/Desktop/ZnaciTo/ImagesOfCars        #Paziti apsolutna putanja
 path, dirs, files = os.walk("C:/Users/Smekac/Desktop/ZnaciTo/ImagesOfCars").__next__()
 file_count = len(files)
 print("Broj fajlova je : " + str(file_count) )
@@ -148,39 +148,3 @@ while index <= file_count:
                         index = index + 1
                         plt.show()
                         break
-
-#Treba da radi !!!!!!!!!!!!!!!!!!!!!
-#
-# PutanjaNove = 'Images\SamoTablice3.jpg'
-# cv2.imwrite(PutanjaNove, Kola1[y:y + h, x:x + w])
-#
-#
-# Tablica = cv2.imread(PutanjaNove)
-#
-# lowerzZaTablicu =  np.array([0, 0, 0], dtype="uint8")         #np.array([0, 0, 0], dtype="uint8")
-# upperZaTablicu  =  np.array([40, 40, 40], dtype="uint8")          #np.array([50, 50, 50], dtype="uint8")
-#
-# mask = cv2.inRange(Kola1[y:y + h, x:x + w], lowerzZaTablicu, upperZaTablicu)
-# KrajnjaTablica = cv2.bitwise_and(Kola1[y:y + h, x:x + w], Kola1[y:y + h, x:x + w], mask=mask)
-# plt.imshow(KrajnjaTablica)
-# plt.show()
-
-
-#Treba da radi !!!!!!!!!!!!!!!!!!!!!
-
-
-# KropovanaSlika = SlikaKola[252:272,288:348]
-# plt.imshow(KropovanaSlika)
-#plt.show()
-# cv2.imwrite('Images\slika%d.jpg' % index, SlikaKola[y:y + h, x:x + w])
-# plt.imshow(iscrtana)
-# plt.show()
-
-# else:
-#     Kola1 = cv2.cvtColor(Kola1, cv2.COLOR_BGR2RGB)
-#     img, Kontura, retSlike = ZaDetekciju(Kola1)
-#     x, y, w, h = cv2.boundingRect(Kontura[0])
-#     print(str(x) + ' Ovo je x kordinsata ,vis: ' + str(y) + ' srina je: ' + str(w) + ' A Visina je: ' + str(h))
-#
-#     plt.imshow(img[y:y + h, x:x + w])
-#     plt.show()
