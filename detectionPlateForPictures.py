@@ -54,13 +54,17 @@ def ZaDetekciju(Okvir):
 
 
 
-import os
+import os,sys
+dir = os.path.dirname(__file__)
+filename = os.path.join(dir, 'ImagesOfCars')
+print("--------------=-=-=-=-=-=-  " + str(filename))
+
                             #C:/Users/Smekac/Desktop/ZnaciTo/ImagesOfCars        #Paziti apsolutna putanja
-path, dirs, files = os.walk("C:/Users/Smekac/Desktop/ZnaciTo/ImagesOfCars").__next__()
+path, dirs, files = os.walk(filename).__next__()
 file_count = len(files)
 print("Broj fajlova je : " + str(file_count) )
 
-#for index in range(1,15):
+
 index =1
 while index <= file_count:
     Kola1 = cv2.imread('ImagesOfCars\kola%d.jpg' %index)
